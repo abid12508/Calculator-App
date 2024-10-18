@@ -38,6 +38,11 @@ class Output:
         except:
             self.input_Field.set("Syntax Error")
         #set field to answer and increment history
-        self.input_Field.set(result)
         self.history += 1
+        #check if history > 39, if so, clear
+        self.input_Field.set(result)
+        if (self.history > 39):
+            self.answer.clear()
+            self.history = 0
+        
         
