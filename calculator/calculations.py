@@ -1,4 +1,5 @@
 from tkinter import *
+import time
 
 class Output:
     #initialize inputfield and history
@@ -9,7 +10,7 @@ class Output:
 
     #clear field
     def clear(self):
-        self.input_Field.set("")
+        self.input_Field.set(" ")
     
     #show the history
     def show_History(self):
@@ -18,22 +19,25 @@ class Output:
         popup.title("History")
         popup.geometry("800x600")
 
-        history_text = "\n".join([f"{k}: {v}" for k, v in self.answer.items()])
+        history_text = "\n".join([f"{k} = {v}" for k, v in self.answer.items()])
         history_Label = Label(popup, text= history_text)
         history_Label.pack()
 
     #add a number/operator
     def add_Number(self, num):
+        if(self.input_Field.get()[-1] == "r"):
+            self.input_Field.set(" ")
         new_Output = StringVar()
         new_Output.set(f'{self.input_Field.get()}{num}')
         self.input_Field.set(new_Output.get())
+
     
     #return the answer
     def return_Value(self):
         #try to get the result and store it into answer dict
         try:
             result = eval(self.input_Field.get())
-            self.answer[f"{self.input_Field.get()} ({self.history})"] = result
+            self.answer[f"({self.history}) {self.input_Field.get()}"] = result
         #if not possible, then give syntax error
         except:
             self.input_Field.set("Syntax Error")

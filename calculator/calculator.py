@@ -15,7 +15,7 @@ class Calculate:
     def screen(self):
         #setting screen variables
         input_Field = tk.StringVar()
-        input_Field.set("")
+        input_Field.set(" ")
 
         self.output = calculations.Output(input_Field, 0)
 
@@ -23,10 +23,10 @@ class Calculate:
         screen_Frame = ttk.Frame()
 
         #set font
-        label_font = font.Font(family='Helvetica', size=30)
+        label_font = font.Font(family='Helvetica', size=28)
 
         #initialize input_Label and customize
-        input_Label = tk.Label(screen_Frame, textvariable=input_Field, font=label_font, width=17, borderwidth=2, relief="solid")
+        input_Label = tk.Label(screen_Frame, textvariable=input_Field, font=label_font, width=17, height=2)
         input_Label.grid(row=0, column=0)
         input_Label.config(anchor='center')
 
