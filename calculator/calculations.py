@@ -1,12 +1,12 @@
 from tkinter import *
-import time
 
 class Output:
     #initialize inputfield and history
-    def __init__(self, input_Field, history):
+    def __init__(self, input_Field, history, buttondic):
         self.input_Field = input_Field
         self.history = history
         self.answer = {}
+        self.buttondic = buttondic
 
     #clear field
     def clear(self):
@@ -27,10 +27,17 @@ class Output:
     def add_Number(self, num):
         if(self.input_Field.get()[-1] == "r"):
             self.input_Field.set(" ")
-        new_Output = StringVar()
-        new_Output.set(f'{self.input_Field.get()}{num}')
-        self.input_Field.set(new_Output.get())
 
+        new_Output = StringVar()
+
+        #if it is a number, then add a number
+        if(isinstance(num, int)):
+            new_Output.set(f'{self.input_Field.get()}{self.buttondic[num]["text"]}')
+        #else, add in the operator
+        else:
+            new_Output.set(f'{self.input_Field.get()}{num}')
+        #set the field to be the new output
+        self.input_Field.set(new_Output.get())
     
     #return the answer
     def return_Value(self):
